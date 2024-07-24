@@ -1,8 +1,11 @@
 import React from "react";
 
-function TodoItem({ todo }) {
+function TodoItem({ todo, onDeleteTodo }) {
   return (
-    <li>{ todo.text }</li>
+    <li>
+      { todo.text }
+      <button onClick={ () => onDeleteTodo(todo.id) }>Delete</button>
+    </li>
   );
 }
 
