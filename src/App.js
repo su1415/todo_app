@@ -14,7 +14,7 @@ function App() {
 
   const handleAddTodo = () => {
     if ( newTodoText.trim() !== "" ) {
-      setTodos([...todos, { id: Date.now(), text: newTodoText }]);
+      setTodos([...todos, { id: Date.now(), text: newTodoText, completed: false }]);
       setNewTodoText("");
     }
   };
@@ -38,6 +38,14 @@ function App() {
     setEditTodoText("");
   };
 
+  const handleToggleComplete = (id) => {
+    setTodos(
+      todos.map(todo =>
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo
+      )
+    );
+  };
+
   return (
     <div className="App">
       <h1>ToDo List</h1>
@@ -51,6 +59,7 @@ function App() {
         todos={ todos }
         onEditTodo={ handleEditTodo }
         onDeleteTodo={ handleDeleteTodo }
+        onToggleComplete={ handleToggleComplete }
       />
       { editTodo && (
         <div>
