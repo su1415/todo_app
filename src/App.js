@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import TodoList from "./components/TodoList"
-import "./App.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   const [todos, setTodos] = useState(loadTodosFromLocalStorage());
@@ -47,17 +47,22 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <h1>ToDo List</h1>
-      <input
-        type="text"
-        value={ newTodoText }
-        onChange={(e) => setNewTodoText(e.target.value) }
-      />
-      <button
-        onClick={ handleAddTodo }>
-        Add
-      </button>
+    <div className="App container mt-5">
+      <h1 className="text-center">ToDo List</h1>
+      <div className="input-group mb-3">
+        <input
+          type="text"
+          className="form-control"
+          placeholder="New ToDo"
+          value={ newTodoText }
+          onChange={(e) => setNewTodoText(e.target.value) }
+        />
+        <button
+          className="btn btn-primary"
+          onClick={ handleAddTodo }>
+          Add
+        </button>
+      </div>
       <TodoList
         todos={ todos }
         onEditTodo={ handleEditTodo }
@@ -65,17 +70,20 @@ function App() {
         onToggleComplete={ handleToggleComplete }
       />
       { editTodo && (
-        <div>
+        <div className="mt-3">
           <input
             type="text"
+            className="form-control mb-2"
             value={ editTodoText }
             onChange={(e) => setEditTodoText(e.target.value) }
           />
           <button
+            className="btn btn-success me-2"
             onClick={ handleSaveEditTodo }>
             Save
           </button>
           <button
+            className="btn btn-secondary"
             onClick={ () => setEditTodo(null) }>
             Cancel
           </button>
