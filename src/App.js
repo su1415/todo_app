@@ -6,7 +6,6 @@ function App() {
   const [todos, setTodos] = useState(loadTodosFromLocalStorage());
   const [newTodoText, setNewTodoText] = useState("");
   const [editTodo, setEditTodo] = useState(null);
-  const [editTodoText, setEditTodoText] = useState("");
 
   useEffect(() => {
     saveTodosToLocalStorage(todos);
@@ -24,18 +23,16 @@ function App() {
   };
 
   const handleEditTodo = (todo) => {
-    setEditTodo(todo);
-    setEditTodoText(todo.text);
+    setEditTodo({ ...todo });
   };
 
   const handleSaveEditTodo = () => {
     setTodos(
       todos.map(todo =>
-        todo.id === editTodo.id ? { ...todo, text: editTodoText } : todo
+        todo.id === editTodo.id ? { ...todo, text: editTodo.text } : todo
       )
     );
     setEditTodo(null);
-    setEditTodoText("");
   };
 
   const handleToggleComplete = (id) => {
@@ -74,8 +71,8 @@ function App() {
           <input
             type="text"
             className="form-control mb-2"
-            value={ editTodoText }
-            onChange={(e) => setEditTodoText(e.target.value) }
+            value={ editTodo.text }
+            onChange={(e) => setEditTodo({ ...editTodo, text: e.target.value }) }
           />
           <button
             className="btn btn-success me-2"
