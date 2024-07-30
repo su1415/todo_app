@@ -54,7 +54,10 @@ function App() {
         value={ newTodoText }
         onChange={(e) => setNewTodoText(e.target.value) }
       />
-      <button onClick={ handleAddTodo }>Add</button>
+      <button
+        onClick={ handleAddTodo }>
+        Add
+      </button>
       <TodoList
         todos={ todos }
         onEditTodo={ handleEditTodo }
@@ -68,8 +71,14 @@ function App() {
             value={ editTodoText }
             onChange={(e) => setEditTodoText(e.target.value) }
           />
-          <button onClick={ handleSaveEditTodo }>Save</button>
-          <button onClick={ () => setEditTodo(null) }>Cancel</button>
+          <button
+            onClick={ handleSaveEditTodo }>
+            Save
+          </button>
+          <button
+            onClick={ () => setEditTodo(null) }>
+            Cancel
+          </button>
         </div>
       )}
     </div>
