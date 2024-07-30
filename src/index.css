@@ -11,3 +11,19 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.completed .text-decoration-line-through {
+  text-decoration: line-through;
+  color: gray;
+}
+
+.custom-checkbox {
+  width: 1.5em;
+  height: 1.5em;
+  cursor: pointer;
+}
+
+.list-group-item {
+  display: flex;
+  align-items: center;
+}

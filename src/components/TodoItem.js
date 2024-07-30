@@ -2,15 +2,15 @@ import React from "react";
 
 function TodoItem({ todo, onEditTodo, onDeleteTodo, onToggleComplete }) {
   return (
-    <li className="list-group-item d-flex justify-content-between align-items-center">
-      <div>
+    <li className={`list-group-item d-flex justify-content-between align-items-center ${todo.completed ? "completed" : ""}`}>
+      <div className="d-flex align-items-center">
         <input
           type="checkbox"
-          className="me-2"
+          className="me-2 custom-checkbox"
           checked={ todo.completed }
           onChange={ () => onToggleComplete(todo.id) }
         />
-        { todo.text }
+        <span className={ todo.completed ? "text-decoration-line-through" : "" }>{ todo.text }</span>
       </div>
       <div>
         <button
