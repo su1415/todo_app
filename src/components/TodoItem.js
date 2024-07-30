@@ -10,7 +10,9 @@ function TodoItem({ todo, onEditTodo, onDeleteTodo, onToggleComplete }) {
           checked={ todo.completed }
           onChange={ () => onToggleComplete(todo.id) }
         />
-        <span className={ todo.completed ? "text-decoration-line-through" : "" }>{ todo.text }</span>
+        <span className={ todo.completed ? "text-decoration-line-through" : "" }>
+          { todo.text } - <small>{ todo.dueDate }</small>
+        </span>
       </div>
       <div>
         <button

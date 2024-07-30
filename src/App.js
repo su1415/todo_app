@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 function App() {
   const [todos, setTodos] = useState(loadTodosFromLocalStorage());
   const [newTodoText, setNewTodoText] = useState("");
+  const [newTodoDueDate, setNewTodoDueDate] = useState("");
   const [editTodo, setEditTodo] = useState(null);
 
   useEffect(() => {
@@ -12,9 +13,10 @@ function App() {
   }, [todos]);
 
   const handleAddTodo = () => {
-    if ( newTodoText.trim() !== "" ) {
-      setTodos([...todos, { id: Date.now(), text: newTodoText, completed: false }]);
+    if ( newTodoText.trim() !== "" && newTodoDueDate.trim() !== "" ) {
+      setTodos([...todos, { id: Date.now(), text: newTodoText, dueDate: newTodoDueDate, completed: false }]);
       setNewTodoText("");
+      setNewTodoDueDate("");
     }
   };
 
@@ -29,7 +31,7 @@ function App() {
   const handleSaveEditTodo = () => {
     setTodos(
       todos.map(todo =>
-        todo.id === editTodo.id ? { ...todo, text: editTodo.text } : todo
+        todo.id === editTodo.id ? { ...todo, text: editTodo.text, dueDate: editTodo.dueDate } : todo
       )
     );
     setEditTodo(null);
@@ -54,6 +56,13 @@ function App() {
           value={ newTodoText }
           onChange={(e) => setNewTodoText(e.target.value) }
         />
+        <input
+          type="date"
+          className="form-control"
+          placeholder="Due Date"
+          value={ newTodoDueDate }
+          onChange={(e) => setNewTodoDueDate(e.target.value) }
+        />
         <button
           className="btn btn-primary"
           onClick={ handleAddTodo }>
@@ -73,6 +82,12 @@ function App() {
             className="form-control mb-2"
             value={ editTodo.text }
             onChange={(e) => setEditTodo({ ...editTodo, text: e.target.value }) }
+          />
+          <input
+            type="date"
+            className="form-control mb-2"
+            value={ editTodo.dueDate }
+            onChange={(e) => setEditTodo({ ...editTodo, dueDate: e.target.value }) }
           />
           <button
             className="btn btn-success me-2"
