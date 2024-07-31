@@ -27,27 +27,27 @@ function TodoItem({ todo, onDeleteTodo, onSaveEditTodo, onToggleComplete }) {
       </div>
       <div className="d-flex align-items-center flex-grow-1">
         { isEditing ? (
-          <>
-            <input
-              type="text"
-              value={ editTodo.text }
-              onChange={(e) => setEditTodo({ ...editTodo, text: e.target.value })}
-              className="form-control me-2 flex-grow-1"
-            />
-            <input
-              type="date"
-              value={ editTodo.dueDate }
-              onChange={(e) => setEditTodo({ ...editTodo, dueDate: e.target.value })}
-              className="form-control due-date"
-              style={{ width: '150px' }}
-              disabled={ !isEditing }
-            />
-          </>
+          <input
+            type="text"
+            value={ editTodo.text }
+            onChange={(e) => setEditTodo({ ...editTodo, text: e.target.value })}
+            className="form-control me-2 flex-grow-1"
+          />
         ) : (
           <span className={ todo.completed ? "text-decoration-line-through" : "" }>
-            { todo.text } - <small>{ todo.dueDate }</small>
+            { todo.text }
           </span>
         )}
+      </div>
+      <div className="d-flex">
+        <input
+          type="date"
+          value={ editTodo.dueDate }
+          onChange={(e) => setEditTodo({ ...editTodo, dueDate: e.target.value })}
+          className="form-control due-date"
+          style={{ width: '150px' }}
+          disabled={ !isEditing }
+        />
       </div>
       <div className="d-flex align-items-center">
         { isEditing ? (
