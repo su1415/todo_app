@@ -13,30 +13,32 @@ function App() {
 
   const handleAddTodo = () => {
     if ( newTodoText.trim() !== "" && newTodoDueDate.trim() !== "" ) {
-      setTodos([...todos, { id: Date.now(), text: newTodoText, dueDate: newTodoDueDate, completed: false }]);
+      const newTodos = [...todos, { id: Date.now(), text: newTodoText, dueDate: newTodoDueDate, completed: false }];
+      setTodos(sortTodosByDate(newTodos));
       setNewTodoText("");
       setNewTodoDueDate("");
     }
   };
 
   const handleDeleteTodo = (id) => {
-    setTodos(todos.filter(todo => todo.id !== id));
+    const newTodos = todos.filter(todo => todo.id !== id);
+    setTodos(sortTodosByDate(newTodos));
   };
 
   const handleSaveEditTodo = (id, text, dueDate) => {
-    setTodos(
+    const newTodos =
       todos.map(todo =>
         todo.id === id ? { ...todo, text, dueDate } : todo
-      )
-    );
+      );
+    setTodos(sortTodosByDate(newTodos));
   };
 
   const handleToggleComplete = (id) => {
-    setTodos(
+    const newTodos =
       todos.map(todo =>
         todo.id === id ? { ...todo, completed: !todo.completed } : todo
-      )
-    );
+      );
+    setTodos(sortTodosByDate(newTodos));
   };
 
   return (
@@ -76,13 +78,17 @@ function App() {
 const loadTodosFromLocalStorage = () => {
   const savedTodos = localStorage.getItem('todos');
   if (savedTodos) {
-    return JSON.parse(savedTodos);
+    return sortTodosByDate(JSON.parse(savedTodos));
   }
   return [];
 };
 
 const saveTodosToLocalStorage = (todos) => {
   localStorage.setItem('todos', JSON.stringify(todos));
+};
+
+const sortTodosByDate = (todos) => {
+  return todos.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
 };
 
 export default App;
