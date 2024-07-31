@@ -14,7 +14,7 @@ function App() {
   const handleAddTodo = () => {
     if ( newTodoText.trim() !== "" && newTodoDueDate.trim() !== "" ) {
       const newTodos = [...todos, { id: Date.now(), text: newTodoText, dueDate: newTodoDueDate, completed: false }];
-      setTodos(sortTodosByDate(newTodos));
+      setTodos(sortTodos(newTodos));
       setNewTodoText("");
       setNewTodoDueDate("");
     }
@@ -22,7 +22,7 @@ function App() {
 
   const handleDeleteTodo = (id) => {
     const newTodos = todos.filter(todo => todo.id !== id);
-    setTodos(sortTodosByDate(newTodos));
+    setTodos(sortTodos(newTodos));
   };
 
   const handleSaveEditTodo = (id, text, dueDate) => {
@@ -30,7 +30,7 @@ function App() {
       todos.map(todo =>
         todo.id === id ? { ...todo, text, dueDate } : todo
       );
-    setTodos(sortTodosByDate(newTodos));
+    setTodos(sortTodos(newTodos));
   };
 
   const handleToggleComplete = (id) => {
@@ -38,7 +38,7 @@ function App() {
       todos.map(todo =>
         todo.id === id ? { ...todo, completed: !todo.completed } : todo
       );
-    setTodos(sortTodosByDate(newTodos));
+    setTodos(sortTodos(newTodos));
   };
 
   return (
@@ -78,7 +78,7 @@ function App() {
 const loadTodosFromLocalStorage = () => {
   const savedTodos = localStorage.getItem('todos');
   if (savedTodos) {
-    return sortTodosByDate(JSON.parse(savedTodos));
+    return sortTodos(JSON.parse(savedTodos));
   }
   return [];
 };
@@ -87,8 +87,16 @@ const saveTodosToLocalStorage = (todos) => {
   localStorage.setItem('todos', JSON.stringify(todos));
 };
 
-const sortTodosByDate = (todos) => {
-  return todos.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
+const sortTodos = (todos) => {
+  // 未完了と完了済のToDo
+  const incompleteTodos = todos.filter(todo => !todo.completed);
+  const completeTodos = todos.filter(todo => todo.completed);
+
+  // それぞれを日付順にソート
+  incompleteTodos.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
+  completeTodos.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
+
+  return [...incompleteTodos, ...completeTodos];
 };
 
 export default App;
