@@ -6,7 +6,6 @@ function App() {
   const [todos, setTodos] = useState(loadTodosFromLocalStorage());
   const [newTodoText, setNewTodoText] = useState("");
   const [newTodoDueDate, setNewTodoDueDate] = useState("");
-  const [editTodo, setEditTodo] = useState(null);
 
   useEffect(() => {
     saveTodosToLocalStorage(todos);
@@ -24,17 +23,12 @@ function App() {
     setTodos(todos.filter(todo => todo.id !== id));
   };
 
-  const handleEditTodo = (todo) => {
-    setEditTodo({ ...todo });
-  };
-
-  const handleSaveEditTodo = () => {
+  const handleSaveEditTodo = (id, text, dueDate) => {
     setTodos(
       todos.map(todo =>
-        todo.id === editTodo.id ? { ...todo, text: editTodo.text, dueDate: editTodo.dueDate } : todo
+        todo.id === id ? { ...todo, text, dueDate } : todo
       )
     );
-    setEditTodo(null);
   };
 
   const handleToggleComplete = (id) => {
@@ -71,36 +65,10 @@ function App() {
       </div>
       <TodoList
         todos={ todos }
-        onEditTodo={ handleEditTodo }
         onDeleteTodo={ handleDeleteTodo }
+        onSaveEditTodo={ handleSaveEditTodo }
         onToggleComplete={ handleToggleComplete }
       />
-      { editTodo && (
-        <div className="mt-3">
-          <input
-            type="text"
-            className="form-control mb-2"
-            value={ editTodo.text }
-            onChange={(e) => setEditTodo({ ...editTodo, text: e.target.value }) }
-          />
-          <input
-            type="date"
-            className="form-control mb-2"
-            value={ editTodo.dueDate }
-            onChange={(e) => setEditTodo({ ...editTodo, dueDate: e.target.value }) }
-          />
-          <button
-            className="btn btn-success me-2"
-            onClick={ handleSaveEditTodo }>
-            Save
-          </button>
-          <button
-            className="btn btn-secondary"
-            onClick={ () => setEditTodo(null) }>
-            Cancel
-          </button>
-        </div>
-      )}
     </div>
   );
 }
