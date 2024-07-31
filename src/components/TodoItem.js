@@ -3,6 +3,7 @@ import React, { useState } from "react";
 function TodoItem({ todo, onDeleteTodo, onSaveEditTodo, onToggleComplete }) {
   const [isEditing, setIsEditing] = useState(false);
   const [editTodo, setEditTodo] = useState(todo);
+  const isOverdue = new Date(todo.dueDate) < new Date() && !todo.completed;
 
   const handleEditToggle = () => {
     setIsEditing(!isEditing);
@@ -15,7 +16,7 @@ function TodoItem({ todo, onDeleteTodo, onSaveEditTodo, onToggleComplete }) {
   };
 
   return (
-    <li className={`list-group-item d-flex justify-content-between align-items-center ${todo.completed ? "completed" : ""}`}>
+    <li className={`list-group-item d-flex justify-content-between align-items-center ${todo.completed ? "completed" : ""} ${isOverdue ? "overdue" : ""}`}>
       <div className="d-flex">
         <input
           type="checkbox"
