@@ -27,3 +27,11 @@ code {
   display: flex;
   align-items: center;
 }
+
+.due-date {
+  margin-right: 0.5rem;
+}
+
+.fixed-width {
+  min-width: 70px;
+}
