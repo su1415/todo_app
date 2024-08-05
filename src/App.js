@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import TodoList from "./components/TodoList"
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   const [todos, setTodos] = useState(loadTodosFromLocalStorage());
@@ -76,7 +76,7 @@ function App() {
 }
 
 const loadTodosFromLocalStorage = () => {
-  const savedTodos = localStorage.getItem('todos');
+  const savedTodos = localStorage.getItem("todos");
   if (savedTodos) {
     return sortTodos(JSON.parse(savedTodos));
   }
@@ -84,7 +84,7 @@ const loadTodosFromLocalStorage = () => {
 };
 
 const saveTodosToLocalStorage = (todos) => {
-  localStorage.setItem('todos', JSON.stringify(todos));
+  localStorage.setItem("todos", JSON.stringify(todos));
 };
 
 const sortTodos = (todos) => {
