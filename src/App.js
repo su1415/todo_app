@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import TodoList from "./components/TodoList"
+import TodoList from "./components/TodoList";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {

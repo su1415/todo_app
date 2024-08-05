@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import TodoItem from "./TodoItem"
+import TodoItem from "./TodoItem";
 
 function TodoList({ todos, onDeleteTodo, onSaveEditTodo, onToggleComplete }) {
   const [showCompleted, setShowCompleted] = useState(false);
