@@ -11,7 +11,7 @@ function TodoItem({ todo, onDeleteTodo, onSaveEditTodo, onToggleComplete }) {
   };
 
   const handleSaveClick = () => {
-    onSaveEditTodo(editTodo.id, editTodo.text, editTodo.dueDate);
+    onSaveEditTodo(editTodo.id, editTodo.text, editTodo.planTime, editTodo.dueDate);
     setIsEditing(false);
   };
 
@@ -40,7 +40,27 @@ function TodoItem({ todo, onDeleteTodo, onSaveEditTodo, onToggleComplete }) {
           </span>
         )}
       </div>
-      <div className="d-flex">
+      <div className="d-flex align-items-center">
+        <div className="input-group me-2" style={{ width: "auto" }}>
+          <input
+            type="number"
+            value={ editTodo.planTime }
+            onChange={(e) => setEditTodo({ ...editTodo, planTime: e.target.value })}
+            className="form-control text-end"
+            style={{ width: "50px", paddingRight: "0px" }}
+            disabled={ !isEditing }
+            step="1"
+          />
+          <span
+            className="input-group-text"
+            style={{
+              backgroundColor: "#e9ecef",
+              borderColor: "#ced4da",
+              color: "#495057",
+            }}>
+            h
+          </span>
+        </div>
         <input
           type="date"
           value={ editTodo.dueDate }

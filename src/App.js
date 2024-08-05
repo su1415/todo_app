@@ -5,6 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 function App() {
   const [todos, setTodos] = useState(loadTodosFromLocalStorage());
   const [newTodoText, setNewTodoText] = useState("");
+  const [newPlanTime, setNewPlanTime] = useState("");
   const [newTodoDueDate, setNewTodoDueDate] = useState("");
 
   useEffect(() => {
@@ -12,10 +13,11 @@ function App() {
   }, [todos]);
 
   const handleAddTodo = () => {
-    if ( newTodoText.trim() !== "" && newTodoDueDate.trim() !== "" ) {
-      const newTodos = [...todos, { id: Date.now(), text: newTodoText, dueDate: newTodoDueDate, completed: false }];
+    if ( newTodoText.trim() !== "" && newPlanTime.trim() !== "" && newTodoDueDate.trim() !== "") {
+      const newTodos = [...todos, { id: Date.now(), text: newTodoText, planTime: newPlanTime, dueDate: newTodoDueDate, completed: false }];
       setTodos(sortTodos(newTodos));
       setNewTodoText("");
+      setNewPlanTime("");
       setNewTodoDueDate("");
     }
   };
@@ -25,10 +27,10 @@ function App() {
     setTodos(sortTodos(newTodos));
   };
 
-  const handleSaveEditTodo = (id, text, dueDate) => {
+  const handleSaveEditTodo = (id, text, planTime, dueDate) => {
     const newTodos =
       todos.map(todo =>
-        todo.id === id ? { ...todo, text, dueDate } : todo
+        todo.id === id ? { ...todo, text, planTime, dueDate } : todo
       );
     setTodos(sortTodos(newTodos));
   };
@@ -51,6 +53,14 @@ function App() {
           placeholder="New ToDo"
           value={ newTodoText }
           onChange={(e) => setNewTodoText(e.target.value) }
+        />
+        <input
+          type="number"
+          className="form-control"
+          placeholder="Plan Time (hours)"
+          value={newPlanTime}
+          onChange={(e) => setNewPlanTime(e.target.value)}
+          step="1"
         />
         <input
           type="date"
