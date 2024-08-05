@@ -40,8 +40,8 @@ function TodoItem({ todo, onDeleteTodo, onSaveEditTodo, onToggleComplete }) {
           </span>
         )}
       </div>
-      <div className="d-flex align-items-center">
-        <div className="input-group me-2" style={{ width: "auto" }}>
+      <div className="d-flex align-items-center flex-wrap">
+        <div className="input-group me-2" style={{ width: "auto", flexShrink: 0 }}>
           <input
             type="number"
             value={ editTodo.planTime }
@@ -66,11 +66,11 @@ function TodoItem({ todo, onDeleteTodo, onSaveEditTodo, onToggleComplete }) {
           value={ editTodo.dueDate }
           onChange={(e) => setEditTodo({ ...editTodo, dueDate: e.target.value })}
           className="form-control due-date"
-          style={{ width: '150px' }}
+          style={{ width: "150px", flexShrink: 0 }}
           disabled={ !isEditing }
         />
       </div>
-      <div className="d-flex align-items-center">
+      <div className="d-flex align-items-center flex-nowrap">
         { isEditing ? (
           <>
             <button

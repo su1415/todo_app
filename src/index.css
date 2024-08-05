@@ -41,3 +41,22 @@ code {
   color: #721c24 !important;
   border-color: #f5c6cb !important;
 }
+
+@media (max-width: 600px) {
+  .d-flex.align-items-center {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .d-flex.align-items-center .input-group,
+  .d-flex.align-items-center .due-date,
+  .d-flex.align-items-center .ms-auto {
+    width: 100%;
+  }
+
+  .d-flex.align-items-center .ms-auto {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 0.5rem;
+  }
+}
