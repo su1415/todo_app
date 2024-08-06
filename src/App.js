@@ -6,6 +6,7 @@ function App() {
   const [todos, setTodos] = useState(loadTodosFromLocalStorage());
   const [newTodoText, setNewTodoText] = useState("");
   const [newTodoDueDate, setNewTodoDueDate] = useState("");
+  const [filter, setFilter] = useState("all");
 
   useEffect(() => {
     saveTodosToLocalStorage(todos);
@@ -41,6 +42,13 @@ function App() {
     setTodos(sortTodos(newTodos));
   };
 
+  const filteredTodos = todos.filter(todo => {
+    if (filter === "all") return true;
+    if (filter === "completed") return todo.completed;
+    if (filter === "incompleted") return !todo.completed;
+    return true;
+  });
+
   return (
     <div className="App container mt-5">
       <h1 className="text-center">ToDo List</h1>
@@ -65,8 +73,13 @@ function App() {
           Add
         </button>
       </div>
+      <div className="mb-3">
+        <button className="btn btn-secondary me-2" onClick={ () => setFilter("all") }>All</button>
+        <button className="btn btn-secondary me-2" onClick={ () => setFilter("completed") }>Completed</button>
+        <button className="btn btn-secondary" onClick={ () => setFilter("incompleted") }>Incompleted</button>
+      </div>
       <TodoList
-        todos={ todos }
+        todos={ filteredTodos }
         onDeleteTodo={ handleDeleteTodo }
         onSaveEditTodo={ handleSaveEditTodo }
         onToggleComplete={ handleToggleComplete }
