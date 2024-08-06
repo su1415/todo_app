@@ -6,11 +6,15 @@ function App() {
   const [todos, setTodos] = useState(loadTodosFromLocalStorage());
   const [newTodoText, setNewTodoText] = useState("");
   const [newTodoDueDate, setNewTodoDueDate] = useState("");
-  const [filter, setFilter] = useState("all");
+  const [filter, setFilter] = useState(loadFilterFromLocalStorage());
 
   useEffect(() => {
     saveTodosToLocalStorage(todos);
   }, [todos]);
+
+  useEffect(() => {
+    saveFilterToLocalStorage(filter);
+  }, [filter]);
 
   const handleAddTodo = () => {
     if ( newTodoText.trim() !== "" && newTodoDueDate.trim() !== "" ) {
@@ -98,6 +102,18 @@ const loadTodosFromLocalStorage = () => {
 
 const saveTodosToLocalStorage = (todos) => {
   localStorage.setItem("todos", JSON.stringify(todos));
+};
+
+const loadFilterFromLocalStorage = () => {
+  const savedfilter = localStorage.getItem("filter");
+  if (savedfilter) {
+    return savedfilter;
+  }
+  return "all";
+};
+
+const saveFilterToLocalStorage = (filter) => {
+  localStorage.setItem("filter", filter);
 };
 
 const sortTodos = (todos) => {
