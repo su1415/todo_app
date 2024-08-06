@@ -117,15 +117,7 @@ const saveFilterToLocalStorage = (filter) => {
 };
 
 const sortTodos = (todos) => {
-  // 未完了と完了済のToDo
-  const incompleteTodos = todos.filter(todo => !todo.completed);
-  const completeTodos = todos.filter(todo => todo.completed);
-
-  // それぞれを日付順にソート
-  incompleteTodos.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
-  completeTodos.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
-
-  return [...incompleteTodos, ...completeTodos];
+  return todos.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
 };
 
 export default App;
