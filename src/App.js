@@ -78,9 +78,21 @@ function App() {
         </button>
       </div>
       <div className="mb-3">
-        <button className="btn btn-secondary me-2" onClick={ () => setFilter("all") }>All</button>
-        <button className="btn btn-secondary me-2" onClick={ () => setFilter("completed") }>Completed</button>
-        <button className="btn btn-secondary" onClick={ () => setFilter("incompleted") }>Incompleted</button>
+        <button
+          className="btn btn-secondary me-2"
+          onClick={ () => setFilter("all") }>
+          All
+        </button>
+        <button
+          className="btn btn-secondary me-2"
+          onClick={ () => setFilter("completed") }>
+          Completed
+        </button>
+        <button
+          className="btn btn-secondary"
+          onClick={ () => setFilter("incompleted") }>
+          Incompleted
+        </button>
       </div>
       <TodoList
         todos={ filteredTodos }
