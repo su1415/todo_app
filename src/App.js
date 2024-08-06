@@ -53,6 +53,14 @@ function App() {
     return true;
   });
 
+  const renderFilterButton = (filterType, label) => (
+    <button
+      className={ `btn btn-outline-secondary ${filter === filterType ? "active" : ""}` }
+      onClick={ () => setFilter(filterType) }>
+      { label }
+    </button>
+  );
+
   return (
     <div className="App container mt-5">
       <h1 className="text-center">ToDo List</h1>
@@ -78,21 +86,9 @@ function App() {
         </button>
       </div>
       <div className="btn-group mb-3">
-        <button
-          className={ `btn btn-outline-secondary ${filter === "all" ? "active" : ""}` }
-          onClick={ () => setFilter("all") }>
-          All
-        </button>
-        <button
-          className={ `btn btn-outline-secondary ${filter === "completed" ? "active" : ""}` }
-          onClick={ () => setFilter("completed") }>
-          Completed
-        </button>
-        <button
-          className={ `btn btn-outline-secondary ${filter === "incompleted" ? "active" : ""}` }
-          onClick={ () => setFilter("incompleted") }>
-          Incompleted
-        </button>
+        { renderFilterButton("all", "All") }
+        { renderFilterButton("completed", "Completed") }
+        { renderFilterButton("incompleted", "Incompleted") }
       </div>
       <TodoList
         todos={ filteredTodos }
