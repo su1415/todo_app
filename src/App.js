@@ -94,10 +94,7 @@ function App() {
 
 const loadTodosFromLocalStorage = () => {
   const savedTodos = localStorage.getItem("todos");
-  if (savedTodos) {
-    return sortTodos(JSON.parse(savedTodos));
-  }
-  return [];
+  return savedTodos ? sortTodos(JSON.parse(savedTodos)) : [];
 };
 
 const saveTodosToLocalStorage = (todos) => {
@@ -106,10 +103,7 @@ const saveTodosToLocalStorage = (todos) => {
 
 const loadFilterFromLocalStorage = () => {
   const savedfilter = localStorage.getItem("filter");
-  if (savedfilter) {
-    return savedfilter;
-  }
-  return "all";
+  return savedfilter ? savedfilter : "all";
 };
 
 const saveFilterToLocalStorage = (filter) => {
