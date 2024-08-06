@@ -77,19 +77,19 @@ function App() {
           Add
         </button>
       </div>
-      <div className="mb-3">
+      <div className="btn-group mb-3">
         <button
-          className="btn btn-secondary me-2"
+          className={ `btn btn-outline-secondary ${filter === "all" ? "active" : ""}` }
           onClick={ () => setFilter("all") }>
           All
         </button>
         <button
-          className="btn btn-secondary me-2"
+          className={ `btn btn-outline-secondary ${filter === "completed" ? "active" : ""}` }
           onClick={ () => setFilter("completed") }>
           Completed
         </button>
         <button
-          className="btn btn-secondary"
+          className={ `btn btn-outline-secondary ${filter === "incompleted" ? "active" : ""}` }
           onClick={ () => setFilter("incompleted") }>
           Incompleted
         </button>
