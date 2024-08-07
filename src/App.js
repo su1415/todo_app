@@ -7,6 +7,7 @@ function App() {
   const [newTodoText, setNewTodoText] = useState("");
   const [newTodoDueDate, setNewTodoDueDate] = useState("");
   const [filter, setFilter] = useState(loadFilterFromLocalStorage());
+  const [searchTodoText, setSearchTodoText] = useState("");
 
   useEffect(() => {
     saveTodosToLocalStorage(todos);
@@ -51,6 +52,8 @@ function App() {
     if (filter === "completed") return todo.completed;
     if (filter === "incompleted") return !todo.completed;
     return true;
+  }).filter(todo => {
+    return todo.text.includes(searchTodoText);
   });
 
   const renderFilterButton = (filterType, label) => (
@@ -89,6 +92,15 @@ function App() {
         { renderFilterButton("all", "All") }
         { renderFilterButton("completed", "Completed") }
         { renderFilterButton("incompleted", "Incompleted") }
+      </div>
+      <div className="mb-3">
+        <input
+          type="text"
+          className="form-control"
+          placeholder="Search Todos"
+          value={ searchTodoText }
+          onChange={ (e) => setSearchTodoText(e.target.value) }
+        />
       </div>
       <TodoList
         todos={ filteredTodos }
