@@ -1,18 +1,11 @@
-# Getting Started with Create React App
+## 実装経緯
 
-## Available Scripts
+React の学習用に作成
 
-In the project directory, you can run:
+## 機能詳細
 
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
+* TODOの登録・削除・編集
+  * TODOは内容・期限を持つ
+* TODOの検索
+  * 未完了のみの表示も可能
+* 期限が本日以前、かつ、完了していないTODOに色を付ける
